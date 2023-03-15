@@ -1,0 +1,202 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "School System ApplicationAPI",
+        "description": "Demo School System API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "api/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Sign up",
+                "description": "sign up by email, password, phone number",
+                "operationId": "authSignup",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "phone"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+10 12345 678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The email has already been taken."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "User created response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "type": "string",
+                                            "example": "98b13a9a-61f8-4ea4-bc0e-260ab8f6d4e1"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "format": "email",
+                                            "example": "user1@mail.com"
+                                        },
+                                        "password": {
+                                            "type": "string",
+                                            "format": "password",
+                                            "example": "PassWord12345"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "+10 12345 678"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "api/user-profile": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Show user profile",
+                "description": "show email, password, phone number",
+                "operationId": "bd3bcc8c08405d6670d8da734a3079ff",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uuid": {
+                                            "type": "string",
+                                            "example": "98b13a9a-61f8-4ea4-bc0e-260ab8f6d4e1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Sura Khalaf"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "format": "email",
+                                            "example": "user1@mail.com"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "+10 12345 678"
+                                        },
+                                        "created_at": {
+                                            "example": "2020-01-01"
+                                        },
+                                        "updated_at": {
+                                            "example": "2020-01-01"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "api/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Log in",
+                "description": "Login by email, password",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "email/password incorrect"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
